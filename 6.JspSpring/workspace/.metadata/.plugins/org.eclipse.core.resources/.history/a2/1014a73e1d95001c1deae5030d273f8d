@@ -1,0 +1,79 @@
+package kr.or.ddit.servlet02;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/01/gugudan.tmpl")
+public class GugudanServletUsingTmpl extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html; charset=utf-8");
+		
+		// 1. tmpl 파일 읽기 : /01/gugudan.tmpl
+		ServletContext application = getServletContext();
+		StringBuffer tmpl = new StringBuffer();
+		try(
+			InputStream is = application.getResourceAsStream("/01/gugudan.tmpl"); // 1차스트림
+			InputStreamReader isr = new InputStreamReader(is); // 연결형스트림, 2차스트림
+			BufferedReader reader = new BufferedReader(isr); 
+		){
+			String tmp = null;
+			while((tmp = reader.readLine()) != null) {
+				tmpl.append(tmp + "\n");
+			}
+			
+		}
+		
+		// 2. 데이터를 치환 : <%=now%>, <%=gugudan%>
+		Map<String, Object> dataMap = new HashMap<>();
+		Calendar now = Calendar.getInstance();
+		dataMap.put("now", now);
+		StringBuffer gugudan = new StringBuffer();
+		dataMap.put("gugudan", gugudan);
+		for(int i = 2; i <= 9; i++) {
+			gugudan.append("<tr>\n");
+			for(int j = 1; j <= 9; j++) {
+				gugudan.append("<td>");
+				String.format("<td>%d * %d = %d </td>\n", i, j, i*j);
+			}
+			gugudan.append("</tr>\n");
+		}
+		
+		String regex = "<%=(\\w+)%>";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(tmpl);
+		
+		StringBuffer html = new StringBuffer();
+		while(matcher.find()) {
+			String dataName = matcher.group(1);
+			Object data = dataMap.get(dataName);
+			matcher.appendReplacement(html, Objects.toString(data, ""));
+		}
+		
+		// 3. 완전한 형태의 html 소스를 응답 전송
+		
+		// try with resource 구문 (java 1.7)
+		try(
+			PrintWriter out = resp.getWriter();
+		){
+			out.print(html);
+		}
+		
+	}
+}

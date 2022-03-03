@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>02/standard.jsp</title>
+</head>
+<body>
+	<h4>표준 JSP 구성요소</h4>
+	<pre>
+		1. 정적 text : HTML, CSS, Javascript, 문자열
+		2. 동적 script 요소 (background 동작, server-side 실행 구조) 
+			1) sciprtlet : &lt;% //이곳에는 Java 코드가 들어갑니다. %&gt;
+				<% 
+				
+					String sample = "변수값";
+				
+				%>
+			2) directive : 
+			3) expression
+			4) declaration
+			5) comment
+	</pre>
+</body>
+</html>

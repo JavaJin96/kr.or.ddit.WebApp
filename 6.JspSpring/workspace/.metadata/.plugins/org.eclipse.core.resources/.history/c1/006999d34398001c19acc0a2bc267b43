@@ -1,0 +1,15 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<html>
+<style type="text/css">
+      table{
+         background-color: yellow;
+         border-collapse: collapse;
+      }
+   </style>
+<body>
+	<h4><%=request.getAttribute("now")%></h4>
+	<table border="1" border-collapse="collapse">
+		<%=request.getAttribute("gugudan")%>
+	</table>
+</body>
+</html>

@@ -1,0 +1,67 @@
+package kr.or.ddit.servlet03;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/02/factorial.do")
+public class FactorialServlet extends HttpServlet{
+	
+	
+	// 클라이언트에게 UI를 제공하기 위한 doGet메서드
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String goPage = "/WEB-INF/views/factorial.jsp";
+		
+		req.getRequestDispatcher(goPage).forward(req, resp);
+	}
+	
+	
+	// JSP를 들러, requeset를 가지고 doPost로 왔다.
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		int operand = 10;
+		String inputNum = req.getParameter("num");
+		operand =  Integer.parseInt(inputNum);	
+ 		if(inputNum==null || inputNum.isEmpty() || !inputNum.matches("\\d+")){
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "메롱이다`");
+			return;
+		}; 
+		
+		/*if(inputNum!=null && !inputNum.isEmpty() && inputNum.matches("\\d+")){
+			operand =  Integer.parseInt(inputNum);		
+		}*/
+		
+		long result = factorial(operand);
+		
+		String goPage = "/WEB-INF/views/factorial.jsp";
+		
+		req.getRequestDispatcher(goPage).forward(req, resp);
+		
+		
+		String res = "{\"sw\" : \" "+ result + " \"  }";
+		PrintWriter out = resp.getWriter();
+
+		req.setAttribute("result", res);
+		
+		out.print(res);
+	
+	
+	}
+	
+	public long factorial(long num){
+		if(num < 0) throw new IllegalArgumentException("움수 피연산자는 처리 불가");
+		else if(num == 1)
+			return 1;
+		return num * factorial (num -1 );	
+	}
+	
+	
+	
+}

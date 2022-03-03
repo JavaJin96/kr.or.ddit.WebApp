@@ -1,0 +1,4 @@
+content-types/org.eclipse.core.runtime.text/charset=utf-8
+content-types/org.eclipse.jst.jsp.core.jspsource/charset=utf-8
+content-types/org.eclipse.wst.html.core.htmlsource/file-names=gugudan.tmpl,clock.tmpl
+eclipse.preferences.version=1

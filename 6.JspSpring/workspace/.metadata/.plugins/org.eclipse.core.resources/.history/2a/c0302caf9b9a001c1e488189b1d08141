@@ -1,0 +1,14 @@
+package kr.or.ddit.enumpkg;
+
+public enum BrowserInfo {
+	//final String EDG = "EDG";
+	//final BrowserInfo EDG = new BrowserInfo();
+	EDG, CHROME, SAFARI, OTHER;
+	
+	private String browserName;
+	
+	public String getBrowserName() {
+		return browserName;
+	}
+	
+}

@@ -1,0 +1,9 @@
+package kr.or.ddit.servlet03;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/model2/gugudan.do")
+public class Model2GugudanServlet extends HttpServlet{
+
+}

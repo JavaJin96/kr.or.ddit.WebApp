@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+
+<script> 
+// wait for the DOM to be loaded 
+$(document).ready(function() { 
+    // bind 'myForm' and provide a simple callback function 
+    $('#myForm').ajaxForm(function() { 
+        alert("Thank you for your comment!"); 
+    }); 
+}); 
+</script>
+
+</head>
+<body>
+	<h4>ajaxFormTest</h4>
+	<form id="myForm" action="<%=request.getContextPath() %>/02/FactorialServlet.do" method="post"> 
+    	Name: <input type="text" name="name" /> 
+    	Comment: <textarea name="comment"></textarea> 
+    	<input type="submit" value="Submit Comment" /> 
+	</form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>04/userAgent.jsp</title>
+</head>
+<body>
+<!-- 
+enum 문법 활용 추천
+사용자의 브라우저 종류를 확인하고
+"당신의 브라우저는 크롬[사파리, 엣지] 입니다."
+와 같은 형태의 메시지를 alert 창으로 출력. 
+-->
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+package kr.or.ddit.servlet03;
+
+import java.io.IOException;
+import java.util.Calendar;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/model2/gugudan.do")
+public class Model2GugudanServlet extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Calendar now = Calendar.getInstance();
+		
+		resp.setContentType("text/html; charset=utf-8");
+		StringBuffer html = new StringBuffer();
+		html.append("<html>\n");
+		html.append("<style>\n");
+		html.append("table{\n");
+		html.append("border : 1px solid white border-collapse:collapse;\n");
+		html.append("background : black;\n");
+		
+		
+		
+		html.append("color : white;\n");
+		html.append("}\n");
+		
+		html.append("td{ width : 100px;}");
+		
+		html.append("h4{\n");
+		html.append("background : pink;\n");
+		html.append("}\n");
+				
+		html.append("</style>\n");
+		html.append("<body>\n");
+		html.append(String.format("<h4> 현재시각 : %tc </h4>\n", now));
+		html.append("<table border='1'>");
+		html.append("<tr><td>단</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>");
+		for(int i = 2; i <= 9; i ++) {
+			html.append(String.format("<tr><td> %d단 </td>", i));
+			for(int j = 1; j <= 9; j ++) {
+				html.append(String.format("<td> %d </td> ", 
+						i*j));				
+			}
+			html.append("</tr>");
+		}
+		
+		html.append("</table>");
+		html.append("</body></table>");
+		
+		
+		
+		
+		
+		
+		String goPage = "/WEB-INF/views/gugudan.jsp";
+		req.getRequestDispatcher(goPage).forward(req, resp);
+	}
+}
